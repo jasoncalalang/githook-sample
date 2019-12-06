@@ -23,3 +23,18 @@ dependencies {
 test {
 	useJUnitPlatform()
 }
+
+githook {
+	gradleCommand = file("gradlew")
+	hooksDir = file(new File(rootDir, ".git/hooks"))
+	failOnMissingHooksDir = true
+	createHooksDirIfNotExist = false
+	hooks {
+		"pre-commit" {
+			task = "test"
+		}
+		"pre-push" {
+			task = "test"
+		}
+	}
+}
